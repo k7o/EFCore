@@ -27,20 +27,24 @@ https://docs.microsoft.com/en-us/ef/core/get-started/overview/first-app?tabs=net
 
 dotnet new classlib -o BlogDL
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet add package Microsoft.EntityFrameworkCore.Design
 
+dotnet ef migrations add InitialCreate
+dotnet ef database update
 
 ## Frontend
 
 https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/intro?view=aspnetcore-5.0&tabs=visual-studio-code
 
-dotnet new webapp -o Blog
+dotnet new webapp -o BlogWebapp
 
-dotnet add reference ..\Blog.DL\Blog.DL.csproj
+dotnet add reference ..\BlogDL\BlogDL.csproj
 
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 dotnet add package Microsoft.EntityFrameworkCore.Design -v 5.0.0-*
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design -v 5.0.0-*
 dotnet add package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore -v 5.0.0-* 
 
 dotnet tool install --global dotnet-aspnet-codegenerator
 
-dotnet aspnet-codegenerator razorpage -m Blog.DL.Blog -dc Blog.DL.BloggingContext -udl -outDir Pages\Blog 
+dotnet aspnet-codegenerator razorpage -m BlogDL.Blog -dc BlogDL.BloggingContext -udl -outDir Pages\Blogging
