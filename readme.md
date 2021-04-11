@@ -47,4 +47,17 @@ dotnet add package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore -v 5.0.0
 
 dotnet tool install --global dotnet-aspnet-codegenerator
 
-dotnet aspnet-codegenerator razorpage -m BlogDL.Blog -dc BlogDL.BloggingContext -udl -outDir Pages\Blogging
+dotnet aspnet-codegenerator razorpage -m BlogDL.Blog -dc BlogDL.BloggingContext -udl -outDir Pages\Blogs
+dotnet aspnet-codegenerator razorpage -m BlogDL.Post -dc BlogDL.BloggingContext -udl -outDir Pages\BlogPosts
+
+https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/complex-data-model?view=aspnetcore-5.0&tabs=visual-studio
+
+
+## Misc
+
+### Intellisense issues VSCode
+https://stackoverflow.com/questions/29975152/intellisense-not-automatically-working-vscode
+
+1. Ctrl + Shift + p
+2. Write "OmniSharp: Select Project" and press Enter.
+3. Choose the solution workspace entry.
