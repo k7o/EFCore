@@ -23,7 +23,11 @@ namespace BlogWebapp
             services.AddRazorPages();
 
             services.AddDbContext<BloggingContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("BloggingContext")));
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("BloggingContext"));
+                
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -27,7 +27,9 @@ namespace BlogWebapp.Pages.Blogs
                 return NotFound();
             }
 
-            Blog = await _context.Blogs.FirstOrDefaultAsync(m => m.BlogId == id);
+            Blog = await _context.Blogs
+                .Include(blog => blog.Posts)
+                .FirstOrDefaultAsync(m => m.BlogId == id);
 
             if (Blog == null)
             {
