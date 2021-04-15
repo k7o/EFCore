@@ -17,6 +17,28 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Blog.Url)
         </dd>
+          <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Blog.Posts)
+        </dt>
+        <dd class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>Title</th>
+                    <th>Content</th>
+                </tr>
+                @foreach (var item in Model.Blog.Posts)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Content)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
     </dl>
 </div>
 <div>

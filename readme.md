@@ -132,7 +132,16 @@ dotnet aspnet-codegenerator razorpage -m BlogDL.Blog -dc BlogDL.BloggingContext 
 ```powershell
 dotnet aspnet-codegenerator razorpage -m BlogDL.Post -dc BlogDL.BloggingContext -udl -outDir Pages\BlogPosts
 ```
-7. Edit startup.cs to use DbContext
+7. Add connectionstring to "appsettings.Development.json" or "appsettings.Development.json"
+```json
+{
+  ...
+  "ConnectionStrings": {
+    "BloggingContext": "Server=localhost;Database=blogging;User Id=sa;Password=gN7quwVBof5BEMPpwQLU;"
+  }
+}
+```
+8. Edit startup.cs to use DbContext
 ```csharp
         public void ConfigureServices(IServiceCollection services)
         {
@@ -146,9 +155,9 @@ dotnet aspnet-codegenerator razorpage -m BlogDL.Post -dc BlogDL.BloggingContext 
 
 
 https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/complex-data-model?view=aspnetcore-5.0&tabs=visual-studio
+https://docs.microsoft.com/en-us/ef/core/querying/related-data/
 
 ## Misc
-
 ### Intellisense issues VSCode
 https://stackoverflow.com/questions/29975152/intellisense-not-automatically-working-vscode
 
