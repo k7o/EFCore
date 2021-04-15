@@ -21,7 +21,8 @@ namespace BlogDL
         // The following configures EF to create a Sqlite database file as `C:\blogging.db`.
         // For Mac or Linux, change this to `/tmp/blogging.db` or any other absolute path.
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlServer(@"Server=localhost;Database=blogging;User Id=sa;Password=gN7quwVBof5BEMPpwQLU;");
+            => options.UseLazyLoadingProxies()
+                      .UseSqlServer(@"Server=localhost;Database=blogging;User Id=sa;Password=gN7quwVBof5BEMPpwQLU;");
     }
 
     [Comment("Blogs managed on the website")]
@@ -31,7 +32,7 @@ namespace BlogDL
         [Display(Name = "Blog URL")]
         [Required]
         public string Url { get; set; }
-        public List<Post> Posts { get; } = new List<Post>();
+        public virtual List<Post> Posts { get; } = new List<Post>();
     }
 
     public class Post
@@ -43,6 +44,6 @@ namespace BlogDL
         public string Content { get; set; }
         public int BlogId { get; set; }
         [Display(Name = "Blog")]
-        public Blog Blog { get; set; }
+        public virtual Blog Blog { get; set; }
     }
 }
