@@ -29,6 +29,10 @@ namespace BlogWebapp.Pages.Blogs
 
             Blog = await _context.Blogs.FirstOrDefaultAsync(m => m.BlogId == id);
 
+            _context.Entry(Blog)
+                    .Collection(b => b.Posts)
+                    .Load();
+
             if (Blog == null)
             {
                 return NotFound();
