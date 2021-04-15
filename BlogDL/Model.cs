@@ -38,6 +38,8 @@ namespace BlogDL
     {
         public int PostId { get; set; }
         public string Title { get; set; }
+
+        [DataType(DataType.MultilineText)]
         public string Content { get; set; }
         public int BlogId { get; set; }
         [Display(Name = "Blog")]

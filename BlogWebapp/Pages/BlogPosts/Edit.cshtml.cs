@@ -36,7 +36,9 @@ namespace BlogWebapp.Pages.BlogPosts
             {
                 return NotFound();
             }
-           ViewData["BlogId"] = new SelectList(_context.Blogs, "BlogId", "Url");
+            
+            ViewData["BlogId"] = new SelectList(_context.Blogs, "BlogId", "Url");
+            
             return Page();
         }
 
