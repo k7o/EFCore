@@ -158,6 +158,10 @@ https://docs.microsoft.com/en-us/ef/core/querying/related-data/
 
 https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/complex-data-model?view=aspnetcore-5.0&tabs=visual-studio
 
+## Blazor
+
+http://www.binaryintellect.net/articles/df0b00f2-e36d-4bd2-a0e6-b0251434c36b.aspx
+
 ## Misc
 ### Intellisense issues VSCode
 https://stackoverflow.com/questions/29975152/intellisense-not-automatically-working-vscode
