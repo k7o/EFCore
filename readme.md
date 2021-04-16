@@ -10,7 +10,7 @@ docker pull mcr.microsoft.com/mssql/server:2019-latest
 ````
 ### Run it
 ```powershell
-docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=gN7quwVBof5BEMPpwQLU' -p 1433:1433 -v G:\Projects\Dotnet\EFCore:/sql -d mcr.microsoft.com/mssql/server:2019-latest
+docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=gN7quwVBof5BEMPpwQLU' -p 1433:1433 -v "G:\Projects\Dotnet\EFCore:/sql" -d mcr.microsoft.com/mssql/server:2019-latest
 ```
 
 ### Easy access to your db instance (with vscode)
