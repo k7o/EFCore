@@ -153,9 +153,10 @@ dotnet aspnet-codegenerator razorpage -m BlogDL.Post -dc BlogDL.BloggingContext 
 
 ```
 
+https://docs.microsoft.com/en-us/ef/core/querying/related-data/
+
 
 https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/complex-data-model?view=aspnetcore-5.0&tabs=visual-studio
-https://docs.microsoft.com/en-us/ef/core/querying/related-data/
 
 ## Misc
 ### Intellisense issues VSCode
