@@ -1,21 +1,33 @@
 syntax = "proto3";
-
 option csharp_namespace = "BlogApi";
+import "google/protobuf/empty.proto";
 
 package blog;
 
 // The greeting service definition.
-service Blog {
+service BlogProto {
   // Sends a greeting
-  rpc SayHello (HelloRequest) returns (HelloReply);
+  rpc GetBlogs (google.protobuf.Empty) returns (Blogs);
 }
 
 // The request message containing the user's name.
-message HelloRequest {
-  string name = 1;
+message Blog {
+  int32 blog_id = 1;
+  string url = 2;
+  repeated Post posts = 3;
+}
+
+message Blogs {
+  repeated Blog blogs_data = 1;
 }
 
 // The response message containing the greetings.
-message HelloReply {
-  string message = 1;
+message Post {
+  int32 post_id = 1;
+  string title = 2;
+  string content = 3;
+}
+
+message Posts {
+  repeated Post posts_data = 1;
 }
