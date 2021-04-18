@@ -26,6 +26,14 @@ namespace BlogApi
                 options.UseSqlServer(Configuration.GetConnectionString("BloggingContext")));
 
             services.AddGrpc();
+
+            services.AddCors(o => o.AddPolicy("AllowAll", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding");
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,10 +45,14 @@ namespace BlogApi
             }
 
             app.UseRouting();
+            
+            app.UseGrpcWeb(); // Must be added between UseRouting and UseEndpoints
+            app.UseCors();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<BlogService>();
+                endpoints.MapGrpcService<BlogService>().EnableGrpcWeb()
+                                                       .RequireCors("AllowAll");
 
                 endpoints.MapGet("/", async context =>
                 {

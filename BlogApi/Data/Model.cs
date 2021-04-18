@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using BlogShared;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogApi.Data
