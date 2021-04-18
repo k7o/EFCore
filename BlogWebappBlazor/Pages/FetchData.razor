@@ -35,7 +35,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        blogs = Grpc.GetBlogs(new Google.Protobuf.WellKnownTypes.Empty());
+        blogs = await Grpc.GetBlogsAsync(new Google.Protobuf.WellKnownTypes.Empty());
     }
 
     public class WeatherForecast
