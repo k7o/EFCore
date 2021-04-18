@@ -12,7 +12,8 @@
   "name": "BlogWebappRadzen",
   "navigation": [
     "Blogs",
-    "Posts"
+    "Posts",
+    "Doingthings"
   ],
   "pages": [
     "Blogs",
@@ -20,7 +21,8 @@
     "Edit Blog",
     "Posts",
     "Add Post",
-    "Edit Post"
+    "Edit Post",
+    "Doingthings"
   ],
   "serverLang": "cs",
   "serverProject": true,

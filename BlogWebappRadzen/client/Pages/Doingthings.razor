@@ -1,0 +1,19 @@
+﻿@page "/doingthings"
+@layout MainLayout
+@inherits BlogWebappRadzen.Pages.DoingthingsComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using BlogWebappRadzen.Models.Blogging
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Doingthings">
+    </RadzenHeading>
+    <RadzenAccordion Multiple="false">
+      <Items>
+        <RadzenAccordionItem Text="Item 1">
+        </RadzenAccordionItem>
+      </Items>
+    </RadzenAccordion>
+  </ChildContent>
+</RadzenContent>

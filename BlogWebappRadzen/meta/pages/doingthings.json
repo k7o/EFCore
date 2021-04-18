@@ -1,0 +1,29 @@
+{
+  "access": "Everybody",
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Doingthings",
+          "type": "heading"
+        },
+        {
+          "items": [
+            {
+              "text": "Item 1"
+            }
+          ],
+          "multiple": false,
+          "name": "accordion0",
+          "type": "accordion"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "layout": "Main",
+  "name": "Doingthings"
+}
