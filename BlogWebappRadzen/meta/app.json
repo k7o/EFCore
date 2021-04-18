@@ -1,0 +1,19 @@
+{
+  "name": "BlogWebappRadzen",
+  "generator": "@radzen/blazor-server",
+  "theme": "humanistic",
+  "logo": "",
+  "pages": [],
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "startPage": null,
+  "https": false,
+  "navigation": [],
+  "dataSources": [],
+  "serverProject": true,
+  "serverVersion": "5",
+  "serverLang": "cs",
+  "wasm": true
+}
