@@ -18,6 +18,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 
+using BlogWebappRadzen.Data;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNet.OData.Builder;
 namespace BlogWebappRadzen
@@ -52,12 +53,20 @@ namespace BlogWebappRadzen
                         .AllowCredentials();
                     });
             });
+            services.AddOData();
+            services.AddODataQueryFilter();
+
+            services.AddDbContext<BlogWebappRadzen.Data.BloggingContext>(options =>
+            {
+              options.UseSqlServer(Configuration.GetConnectionString("BloggingConnection"));
+            });
 
             services.AddRazorPages();
             OnConfigureServices(services);
         }
 
         partial void OnConfigure(IApplicationBuilder app, IWebHostEnvironment env);
+        partial void OnConfigureOData(ODataConventionModelBuilder builder);
         partial void OnConfiguring(IApplicationBuilder app, IWebHostEnvironment env);
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -92,6 +101,19 @@ namespace BlogWebappRadzen
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
                 endpoints.MapFallbackToFile("index.html");
+                endpoints.Count().Filter().OrderBy().Expand().Select().MaxTop(null).SetTimeZoneInfo(TimeZoneInfo.Utc);
+
+                var oDataBuilder = new ODataConventionModelBuilder(provider);
+
+                oDataBuilder.EntitySet<BlogWebappRadzen.Models.Blogging.Blog>("Blogs");
+                oDataBuilder.EntitySet<BlogWebappRadzen.Models.Blogging.Post>("Posts");
+
+                this.OnConfigureOData(oDataBuilder);
+
+                var model = oDataBuilder.GetEdmModel();
+
+                endpoints.MapODataRoute("odata", "odata/Blogging", model);
+
             });
 
             OnConfigure(app, env);

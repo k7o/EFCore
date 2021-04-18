@@ -1,0 +1,390 @@
+{
+  "info": {
+    "title": "Blogging",
+    "x-type": "odata",
+    "x-connector": "mssql",
+    "x-connector-version": 15
+  },
+  "definitions": {
+    "Blog": {
+      "x-table": "dbo.Blogs",
+      "resource": "Blogs",
+      "required": [],
+      "properties": {
+        "BlogId": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer",
+          "x-navigation": [
+            {
+              "inversePropertyName": "Blog",
+              "name": "Posts",
+              "type": "Post"
+            }
+          ]
+        },
+        "Url": {
+          "type": "string"
+        },
+        "Posts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Post"
+          }
+        }
+      }
+    },
+    "Post": {
+      "x-table": "dbo.Posts",
+      "resource": "Posts",
+      "required": [],
+      "properties": {
+        "PostId": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer"
+        },
+        "Title": {
+          "type": "string"
+        },
+        "Content": {
+          "type": "string"
+        },
+        "Blog": {
+          "type": "object",
+          "$ref": "#/definitions/Blog"
+        },
+        "BlogId": {
+          "x-precision": 10,
+          "type": "integer",
+          "x-foreignKey": {
+            "parentTable": "Blogs",
+            "parentEntityType": "Blog",
+            "type": "Blog",
+            "principalKey": "BlogId",
+            "name": "Blog",
+            "textProperty": "Url",
+            "navigationProperty": "Posts"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/Blogs": {
+      "get": {
+        "operationId": "getBlogs",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Blog"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createBlog",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Blog",
+            "schema": {
+              "$ref": "#/definitions/Blog"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Blog"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Posts": {
+      "get": {
+        "operationId": "getPosts",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Post"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createPost",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Post",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Blogs({BlogId})": {
+      "delete": {
+        "operationId": "deleteBlog",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "BlogId",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getBlogByBlogId",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "BlogId",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Blog"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateBlog",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "BlogId",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Blog",
+            "schema": {
+              "$ref": "#/definitions/Blog"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Posts({PostId})": {
+      "delete": {
+        "operationId": "deletePost",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "PostId",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getPostByPostId",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "PostId",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updatePost",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "PostId",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Post",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "basePath": "/odata/Blogging",
+  "host": "localhost:5001",
+  "schemes": [
+    "https"
+  ]
+}

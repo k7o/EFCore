@@ -1,19 +1,31 @@
 {
-  "name": "BlogWebappRadzen",
+  "dataSources": [
+    "Blogging"
+  ],
   "generator": "@radzen/blazor-server",
-  "theme": "humanistic",
-  "logo": "",
-  "pages": [],
+  "https": false,
   "layouts": [
     "Login",
     "Main"
   ],
-  "startPage": null,
-  "https": false,
-  "navigation": [],
-  "dataSources": [],
+  "logo": "",
+  "name": "BlogWebappRadzen",
+  "navigation": [
+    "Blogs",
+    "Posts"
+  ],
+  "pages": [
+    "Blogs",
+    "Add Blog",
+    "Edit Blog",
+    "Posts",
+    "Add Post",
+    "Edit Post"
+  ],
+  "serverLang": "cs",
   "serverProject": true,
   "serverVersion": "5",
-  "serverLang": "cs",
+  "startPage": "Blogs",
+  "theme": "humanistic",
   "wasm": true
 }

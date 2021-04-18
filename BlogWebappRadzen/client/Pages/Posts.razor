@@ -1,0 +1,50 @@
+﻿@page "/posts"
+@layout MainLayout
+@inherits BlogWebappRadzen.Pages.PostsComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using BlogWebappRadzen.Models.Blogging
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Posts">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenSplitButton Icon="get_app" style="margin-left: 10px; margin-bottom: 10px" Text="Export" Click="@Splitbutton0Click">
+          <ChildContent>
+            <RadzenSplitButtonItem Text="Excel" Value="xlsx">
+            </RadzenSplitButtonItem>
+            <RadzenSplitButtonItem Text="CSV" Value="csv">
+            </RadzenSplitButtonItem>
+          </ChildContent>
+        </RadzenSplitButton>
+        <RadzenTextBox Placeholder="Search ..." style="display: block; margin-bottom: 10px; width: 100%" Name="Textbox0" @oninput="@(async(args) => {search = $"{args.Value}";await grid0.GoToPage(0);await grid0.Reload();})">
+        </RadzenTextBox>
+        <RadzenGrid @ref="grid0" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@getPostsResult" Count="@getPostsCount" TItem="BlogWebappRadzen.Models.Blogging.Post" LoadData="@Grid0LoadData" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenGridColumn TItem="BlogWebappRadzen.Models.Blogging.Post" Property="PostId" Title="Post Id">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="BlogWebappRadzen.Models.Blogging.Post" Property="Title" Title="Title">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="BlogWebappRadzen.Models.Blogging.Post" Property="Content" Title="Content">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="BlogWebappRadzen.Models.Blogging.Post" Property="BlogId" SortProperty="Blog.Url" FilterProperty="Blog.Url" Title="Blog">
+              <Template Context="data">
+              @(data.Blog?.Url)
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="BlogWebappRadzen.Models.Blogging.Post" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+              <Template Context="blogWebappRadzenModelsBloggingPost">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, blogWebappRadzenModelsBloggingPost))" @onclick:stopPropagation="true">
+                </RadzenButton>
+              </Template>
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

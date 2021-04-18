@@ -1,0 +1,57 @@
+﻿@page "/edit-post/{PostId}"
+@layout MainLayout
+@inherits BlogWebappRadzen.Pages.EditPostComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using BlogWebappRadzen.Models.Blogging
+<RadzenContent Container="main">
+  <ChildContent>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm TItem="BlogWebappRadzen.Models.Blogging.Post" Data="@post" Visible="@(post != null)" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="Title" Component="Title" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox style="width: 100%" @bind-Value="@(post.Title)" Name="Title">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="Content" Component="Content" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox style="width: 100%" @bind-Value="@(post.Content)" Name="Content">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="Blog" Component="BlogId" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDownDataGrid Data="@getBlogsForBlogIdResult" TextProperty="Url" ValueProperty="BlogId" Placeholder="Choose Blog" ShowSearch="false" Count="@getBlogsForBlogIdCount" @bind-Value="@(post.BlogId)" style="width: 100%" SelectedValue="@getByBlogsForBlogIdResult" Name="BlogId" LoadData="@BlogIdLoadData">
+                </RadzenDropDownDataGrid>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="ButtonStyle.Primary">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Light" style="margin-left: 1rem" Text="Cancel" Click="@Button2Click">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

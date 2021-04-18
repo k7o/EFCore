@@ -25,6 +25,8 @@ namespace BlogWebappRadzen
             builder.Services.AddScoped<TooltipService>();
             builder.Services.AddScoped<ContextMenuService>();
 
+            builder.Services.AddScoped<BloggingService>();
+
             OnConfigureBuilder(builder);
 
             await builder.Build().RunAsync();

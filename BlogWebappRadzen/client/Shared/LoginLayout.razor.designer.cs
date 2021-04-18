@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
+using BlogWebappRadzen.Models.Blogging;
 using BlogWebappRadzen.Pages;
 
 namespace BlogWebappRadzen.Layouts
@@ -26,6 +27,9 @@ namespace BlogWebappRadzen.Layouts
 
         [Inject]
         protected NotificationService NotificationService { get; set; }
+        [Inject]
+        protected BloggingService Blogging { get; set; }
+
         protected RadzenBody body0;
 
     }
